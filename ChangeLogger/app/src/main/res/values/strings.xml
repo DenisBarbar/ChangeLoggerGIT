@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">ChangeLogger</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Headers -->
+    <string name="changes_text">Изменения</string>
+    <string name="products_text">Продукты</string>
+    <string name="versions_text">Версии</string>
+    <string name="CRUD_text">CRUD</string>
+    <string name="admin_text">Админская панель</string>
+
+    <!-- fragment_changes_header -->
+    <string name="changes_count">11 changes</string>
+    <string name="hint">Find a post</string>
+    <string name="button_search">Search</string>
+    <string name="button_save">Save</string>
+    <string name="filter_all">All</string>
+    <string name="filter_public">Public</string>
+    <string name="filter_private">Private</string>
+    <string name="button_new">New</string>
+    <string name="button_prev">Prew</string>
+    <string name="button_next">Next</string>
+
+    <string-array name="products">
+        <item>Product 1</item>
+        <item>Product 2</item>
+        <item>Product 3</item>
+        <item>Product 4</item>
+        <item>Product 5</item>
+    </string-array>
+
+</resources>
