@@ -1,6 +1,6 @@
 package com.fast_report.changelogger;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,24 +11,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
-public class ChangesFragment extends Fragment {
+public class ChangesListFragment extends Fragment {
 
     private RecyclerView mChangeRecyclerView;
     private ChangeAdapter mAdapter;
+    private List<Change> mChanges;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("ChangesFragment", "onCreate");
+        Log.d("ChangesListFragment", "onCreate");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        Log.d("ChangesFragment", "onCreateView");
+        Log.d("ChangesListFragment", "onCreateView");
         ((MainActivity)getActivity()).setActionBarTitle("Changes");
         View view = inflater.inflate(R.layout.fragment_changes_list, container, false);
         mChangeRecyclerView = (RecyclerView) view.findViewById(R.id.changes_recycler_view);
@@ -40,44 +40,44 @@ public class ChangesFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Log.d("ChangesFragment", "onStart");
+        Log.d("ChangesListFragment", "onStart");
     }
 
 
     @Override
     public void onResume(){
         super.onResume();
-        Log.d("ChangesFragment", "onResume");
+        Log.d("ChangesListFragment", "onResume");
         updateUI();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Log.d("ChangesFragment", "onPause");
+        Log.d("ChangesListFragment", "onPause");
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        Log.d("ChangesFragment", "onStop");
+        Log.d("ChangesListFragment", "onStop");
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.d("ChangesFragment", "onDestroyView");
+        Log.d("ChangesListFragment", "onDestroyView");
     }
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d("ChangesFragment", "onDestroy");
+        Log.d("ChangesListFragment", "onDestroy");
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        Log.d("ChangesFragment", "onDetach");
+        Log.d("ChangesListFragment", "onDetach");
     }
 
     private void updateUI(){
@@ -99,7 +99,8 @@ public class ChangesFragment extends Fragment {
         private TextView mGroupTextView;
         private TextView mAuthorTextView;
         private TextView mChangedTextView;
-        //private Button mDeleteButton;
+        private Button mDeleteButton;
+        private Button mEditButton;
 
         public void bindChange(Change change) {
             mChange = change;
@@ -117,23 +118,27 @@ public class ChangesFragment extends Fragment {
             mGroupTextView = (TextView) itemView.findViewById(R.id.list_item_change_group);
             mAuthorTextView = (TextView) itemView.findViewById(R.id.list_item_change_author);
             mChangedTextView = (TextView) itemView.findViewById(R.id.list_item_changed_text);
-            /*
             mDeleteButton = (Button) itemView.findViewById(R.id.delete_button);
             mDeleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mAdapter.mChanges.remove(mChange.getId());
+                    mChanges.remove(mChange);
                     updateUI();
                 }
             });
-            */
+            mEditButton = (Button) itemView.findViewById(R.id.edit_button);
+            mEditButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = SingleChangeActivity.newIntent(getActivity(), mChange.getId()); //Неявный вызов putExtra?
+                    startActivity(intent);
+                }
+            });
         }
 
     }
 
     private class ChangeAdapter extends RecyclerView.Adapter<ChangeHolder>{
-
-        private List<Change> mChanges;
 
         public ChangeAdapter(List<Change> changes){
             mChanges = changes;
@@ -146,11 +151,10 @@ public class ChangesFragment extends Fragment {
                     .inflate(R.layout.list_item_change, parent, false);
             return new ChangeHolder(view);
         }
-
         @Override
         public void onBindViewHolder(ChangeHolder holder, int position){
-            Change crime = mChanges.get(position);
-            holder.bindChange(crime);
+            Change change = mChanges.get(position);
+            holder.bindChange(change);
         }
         @Override
         public int getItemCount(){

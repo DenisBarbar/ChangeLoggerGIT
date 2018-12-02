@@ -11,7 +11,6 @@ public class Change {
     private String mChangedText;
 
     public Change() {
-        //Генерирование уникального идентификатора
         mId = UUID.randomUUID();
     }
 

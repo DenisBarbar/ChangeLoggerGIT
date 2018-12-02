@@ -31,6 +31,13 @@
     <string name="merge_request_link_text">Merge Request Link</string>
     <string name="documentation_link_text">Documentation Link</string>
     <string name="private_change_text">Private Change</string>
+    <string name="version_label">Версия продукта:</string>
+    <string name="type_label">Тип обновления:</string>
+    <string name="group_label">Группа обновления:</string>
+    <string name="author_label">Автор обновления:</string>
+    <string name="private_change_label">Разрешено изменение:</string>
+    <string name="private_change">Private Change</string>
+    <string name="text_label">Изменения в данной версии:</string>
 
     <string-array name="products">
         <item>Product 1</item>

@@ -1,7 +1,6 @@
 package com.fast_report.changelogger;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,7 +14,7 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    ChangesFragment changesFragment;
+    ChangesListFragment mChangesListFragment;
     ProductsFragment productsFragment;
     VersionsFragment versionsFragment;
     CRUDFragment crudFragment;
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        changesFragment = new ChangesFragment();
+        mChangesListFragment = new ChangesListFragment();
         productsFragment = new ProductsFragment();
         versionsFragment = new VersionsFragment();
         crudFragment = new CRUDFragment();
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity
 
         if (savedInstanceState == null){
             FragmentTransaction ftrans = getSupportFragmentManager().beginTransaction();
-            ftrans.replace(R.id.fragment_container, changesFragment);
+            ftrans.replace(R.id.fragment_container, mChangesListFragment);
             ftrans.commit();
             navigationView.setCheckedItem(R.id.nav_changes);
         }
@@ -92,7 +91,7 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction ftrans = getSupportFragmentManager().beginTransaction();
 
         if (id == R.id.nav_changes) {
-            ftrans.replace(R.id.fragment_container, changesFragment);
+            ftrans.replace(R.id.fragment_container, mChangesListFragment);
         } else if (id == R.id.nav_products) {
             ftrans.replace(R.id.fragment_container, productsFragment);
         } else if (id == R.id.nav_versions) {
