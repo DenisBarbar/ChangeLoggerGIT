@@ -21,4 +21,5 @@ public class SingleChangeActivity extends SingleFragmentActivity {
         UUID changeId = (UUID) getIntent().getSerializableExtra(EXTRA_CHANGE_ID);
         return SingleChangeFragment.newInstance(changeId);
     }
+
 }

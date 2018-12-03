@@ -38,6 +38,8 @@
     <string name="private_change_label">Разрешено изменение:</string>
     <string name="private_change">Private Change</string>
     <string name="text_label">Изменения в данной версии:</string>
+    <string name="save_button_text">Сохранить</string>
+    <string name="reset_button_text">Сбросить</string>
 
     <string-array name="products">
         <item>Product 1</item>
