@@ -41,6 +41,9 @@ public class ChangesListFragment extends Fragment {
     public void onStart() {
         super.onStart();
         Log.d("ChangesListFragment", "onStart");
+        if (mChangeRecyclerView.getAdapter() == null || mAdapter == null){
+            Log.d("ChangesListFragment", "Adapter lost");
+        }
     }
 
 
@@ -48,6 +51,9 @@ public class ChangesListFragment extends Fragment {
     public void onResume(){
         super.onResume();
         Log.d("ChangesListFragment", "onResume");
+        if (mChangeRecyclerView.getAdapter() == null || mAdapter == null){
+            Log.d("ChangesListFragment", "Adapter lost");
+        }
         updateUI();
     }
 
@@ -55,40 +61,55 @@ public class ChangesListFragment extends Fragment {
     public void onPause() {
         super.onPause();
         Log.d("ChangesListFragment", "onPause");
+        if (mChangeRecyclerView.getAdapter() == null || mAdapter == null){
+            Log.d("ChangesListFragment", "Adapter lost");
+        }
     }
 
     @Override
     public void onStop() {
         super.onStop();
         Log.d("ChangesListFragment", "onStop");
+        if (mChangeRecyclerView.getAdapter() == null || mAdapter == null){
+            Log.d("ChangesListFragment", "Adapter lost");
+        }
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         Log.d("ChangesListFragment", "onDestroyView");
+        if (mChangeRecyclerView.getAdapter() == null || mAdapter == null){
+            Log.d("ChangesListFragment", "Adapter lost");
+        }
     }
     @Override
     public void onDestroy() {
         super.onDestroy();
         Log.d("ChangesListFragment", "onDestroy");
+        if (mChangeRecyclerView.getAdapter() == null || mAdapter == null){
+            Log.d("ChangesListFragment", "Adapter lost");
+        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         Log.d("ChangesListFragment", "onDetach");
+        if (mChangeRecyclerView.getAdapter() == null || mAdapter == null){
+            Log.d("ChangesListFragment", "Adapter lost");
+        }
     }
 
     private void updateUI(){
         ChangeLab changeLab = ChangeLab.get(getActivity());
-        List<Change> crimes = changeLab.getChanges();
-        if(mChangeRecyclerView.getAdapter() == null){
-            mAdapter = new ChangeAdapter(crimes);
-            mChangeRecyclerView.setAdapter(mAdapter);
+        List<Change> changes = changeLab.getChanges();
+        if(mAdapter == null){
+            mAdapter = new ChangeAdapter(changes);
         } else {
             mAdapter.notifyDataSetChanged();
         }
+        mChangeRecyclerView.setAdapter(mAdapter);
     }
 
     private class ChangeHolder extends RecyclerView.ViewHolder {
