@@ -22,8 +22,8 @@ public class ChangeLab {
         for (int i = 0; i < 100; i++){
             Change change = new Change();
             change.setVersion("1.0" + i);
-            change.setType("тип");
-            change.setGroup("группа");
+            change.setType("changed");
+            change.setGroup("public");
             change.setAuthor("автор");
             change.setChangedText("Изменения в данной версии");
             mChanges.add(change);

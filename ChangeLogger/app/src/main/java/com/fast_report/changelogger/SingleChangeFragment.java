@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.UUID;
+import java.util.concurrent.Callable;
 
 public class SingleChangeFragment extends Fragment {
 
@@ -27,6 +28,8 @@ public class SingleChangeFragment extends Fragment {
     private Spinner mGroupSpinner;
     private Button mSaveButton;
     private Button mResetButton;
+    String[] typeArray;
+    String[] groupArray;
 
     public static SingleChangeFragment newInstance(UUID changeId){
         Bundle args = new Bundle();
@@ -56,21 +59,23 @@ public class SingleChangeFragment extends Fragment {
 
         mTextField = (EditText) v.findViewById(R.id.text_field);
         mTextField.setText(mChange.getChangedText());
-        /*
-        // адаптер
-        ArrayAdapter<String> adapter = ArrayAdapter.createFromResource(this, R.array.products, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         mTypeSpinner = (Spinner) v.findViewById(R.id.type_spinner);
-        mTypeSpinner.setAdapter(adapter);
-        // заголовок
-        mTypeSpinner.setPrompt("Title");
-        // выделяем элемент
-        mTypeSpinner.setSelection(2);
-
-        */
+        // получаем ресурсы
+        typeArray = getResources().getStringArray(R.array.types_array);
+        // создаем адаптер
+        ArrayAdapter<String> typeAdapter = new ArrayAdapter(this.getContext(), android.R.layout.simple_spinner_item, typeArray);
+        mTypeSpinner.setAdapter(typeAdapter);
+        updateTypeSpinner();
 
         mGroupSpinner = (Spinner) v.findViewById(R.id.group_spinner);
+        // получаем ресурс
+        groupArray = getResources().getStringArray(R.array.groups_array);
+        // создаем адаптер
+        ArrayAdapter<String> groupAdapter = new ArrayAdapter(this.getContext(), android.R.layout.simple_spinner_item, groupArray);
+        mGroupSpinner.setAdapter(groupAdapter);
+        updateGroupSpinner();
+
         mSaveButton = (Button) v.findViewById(R.id.save_button);
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +83,8 @@ public class SingleChangeFragment extends Fragment {
                 mChange.setVersion(mVersionField.getText().toString());
                 mChange.setAuthor(mAuthorField.getText().toString());
                 mChange.setChangedText(mTextField.getText().toString());
+                mChange.setType(mTypeSpinner.getSelectedItem().toString());
+                mChange.setGroup(mGroupSpinner.getSelectedItem().toString());
             }
         });
         mResetButton = (Button) v.findViewById(R.id.reset_button);
@@ -88,10 +95,26 @@ public class SingleChangeFragment extends Fragment {
                 mVersionField.setText(mChange.getVersion());
                 mAuthorField.setText(mChange.getAuthor());
                 mTextField.setText(mChange.getChangedText());
+                updateTypeSpinner();
+                updateGroupSpinner();
             }
         });
 
 
         return v;
+    }
+    private void updateTypeSpinner(){
+        for (int i=0; i<typeArray.length; i++){
+            if (mChange.getType().equals(typeArray[i])) {
+                mTypeSpinner.setSelection(i);
+            }
+        }
+    }
+    private void updateGroupSpinner(){
+        for (int i=0; i<groupArray.length; i++){
+            if (mChange.getGroup().equals(groupArray[i])) {
+                mGroupSpinner.setSelection(i);
+            }
+        }
     }
 }

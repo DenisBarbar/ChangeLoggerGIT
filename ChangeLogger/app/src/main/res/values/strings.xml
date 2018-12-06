@@ -48,6 +48,19 @@
         <item>Product 4</item>
         <item>Product 5</item>
     </string-array>
+
+    <string-array name="types_array">
+        <item>added</item>
+        <item>changed</item>
+        <item>fixed</item>
+        <item>deleted</item>
+    </string-array>
+
+    <string-array name="groups_array">
+        <item>public</item>
+        <item>private</item>
+    </string-array>
+
     <string name="title_activity_login">ChangeLogger</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
