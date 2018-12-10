@@ -14,6 +14,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     ChangesListFragment mChangesListFragment;
+    ChangesHeaderFragment mChangesHeaderFragment;
+    PaginationFragment mPaginationFragment;
     ProductsFragment productsFragment;
     VersionsFragment versionsFragment;
     CRUDFragment crudFragment;
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         mChangesListFragment = new ChangesListFragment();
+        mChangesHeaderFragment = new ChangesHeaderFragment();
+        mPaginationFragment = new PaginationFragment();
         productsFragment = new ProductsFragment();
         versionsFragment = new VersionsFragment();
         crudFragment = new CRUDFragment();
@@ -43,7 +47,9 @@ public class MainActivity extends AppCompatActivity
 
         if (savedInstanceState == null){
             FragmentTransaction ftrans = getSupportFragmentManager().beginTransaction();
-            ftrans.replace(R.id.fragment_container, mChangesListFragment);
+            ftrans.add(R.id.head_fragment, mChangesHeaderFragment);
+            ftrans.add(R.id.main_fragment, mChangesListFragment);
+            ftrans.add(R.id.footer_fragment, mPaginationFragment);
             ftrans.commit();
             navigationView.setCheckedItem(R.id.nav_changes);
         }
@@ -73,15 +79,18 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction ftrans = getSupportFragmentManager().beginTransaction();
 
         if (id == R.id.nav_changes) {
-            ftrans.replace(R.id.fragment_container, mChangesListFragment);
+            ftrans.replace(R.id.head_fragment, mChangesHeaderFragment);
+            ftrans.replace(R.id.main_fragment, mChangesListFragment);
+            ftrans.replace(R.id.footer_fragment, mPaginationFragment);
         } else if (id == R.id.nav_products) {
-            ftrans.replace(R.id.fragment_container, productsFragment);
+            ftrans.remove(mChangesHeaderFragment);
+            ftrans.replace(R.id.main_fragment, productsFragment);
         } else if (id == R.id.nav_versions) {
-            ftrans.replace(R.id.fragment_container, versionsFragment);
+            ftrans.replace(R.id.main_fragment, versionsFragment);
         } else if (id == R.id.nav_crud) {
-            ftrans.replace(R.id.fragment_container, crudFragment);
+            ftrans.replace(R.id.main_fragment, crudFragment);
         } else if (id == R.id.nav_admin) {
-            ftrans.replace(R.id.fragment_container, adminFragment);
+            ftrans.replace(R.id.main_fragment, adminFragment);
         } else if (id == R.id.nav_profile) {
 
         } else if (id == R.id.nav_settings) {
