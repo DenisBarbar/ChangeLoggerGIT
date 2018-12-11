@@ -32,7 +32,7 @@
             android:inputType="textPersonName" />
 
         <Button
-            android:id="@+id/buttonSearch"
+            android:id="@+id/button_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -80,14 +80,14 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/buttonSave"
+            android:id="@+id/button_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/button_save" />
 
         <Button
-            android:id="@+id/buttonNew"
+            android:id="@+id/button_new"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -108,5 +108,4 @@
             android:background="@android:color/background_light"
             android:entries="@array/products" />
     </LinearLayout>
-
 </LinearLayout>

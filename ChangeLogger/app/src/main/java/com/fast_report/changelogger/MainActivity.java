@@ -1,6 +1,8 @@
 package com.fast_report.changelogger;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -9,13 +11,17 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     ChangesListFragment mChangesListFragment;
     ChangesHeaderFragment mChangesHeaderFragment;
-    PaginationFragment mPaginationFragment;
     ProductsFragment productsFragment;
     VersionsFragment versionsFragment;
     CRUDFragment crudFragment;
@@ -23,6 +29,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Скрывать клавиатуру при создании активности
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -39,7 +50,6 @@ public class MainActivity extends AppCompatActivity
 
         mChangesListFragment = new ChangesListFragment();
         mChangesHeaderFragment = new ChangesHeaderFragment();
-        mPaginationFragment = new PaginationFragment();
         productsFragment = new ProductsFragment();
         versionsFragment = new VersionsFragment();
         crudFragment = new CRUDFragment();
@@ -47,9 +57,8 @@ public class MainActivity extends AppCompatActivity
 
         if (savedInstanceState == null){
             FragmentTransaction ftrans = getSupportFragmentManager().beginTransaction();
-            ftrans.add(R.id.head_fragment, mChangesHeaderFragment);
-            ftrans.add(R.id.main_fragment, mChangesListFragment);
-            ftrans.add(R.id.footer_fragment, mPaginationFragment);
+            ftrans.replace(R.id.head_fragment, mChangesHeaderFragment);
+            ftrans.replace(R.id.main_fragment, mChangesListFragment);
             ftrans.commit();
             navigationView.setCheckedItem(R.id.nav_changes);
         }
@@ -81,15 +90,17 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_changes) {
             ftrans.replace(R.id.head_fragment, mChangesHeaderFragment);
             ftrans.replace(R.id.main_fragment, mChangesListFragment);
-            ftrans.replace(R.id.footer_fragment, mPaginationFragment);
         } else if (id == R.id.nav_products) {
             ftrans.remove(mChangesHeaderFragment);
             ftrans.replace(R.id.main_fragment, productsFragment);
         } else if (id == R.id.nav_versions) {
+            ftrans.remove(mChangesHeaderFragment);
             ftrans.replace(R.id.main_fragment, versionsFragment);
         } else if (id == R.id.nav_crud) {
+            ftrans.remove(mChangesHeaderFragment);
             ftrans.replace(R.id.main_fragment, crudFragment);
         } else if (id == R.id.nav_admin) {
+            ftrans.remove(mChangesHeaderFragment);
             ftrans.replace(R.id.main_fragment, adminFragment);
         } else if (id == R.id.nav_profile) {
 
@@ -109,4 +120,21 @@ public class MainActivity extends AppCompatActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
     }
+
+    //Метод скрытия клавиатуры по любому действию
+    /*
+    @Override
+    public boolean dispatchTouchEvent(@NonNull MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (v instanceof EditText) {
+                v.clearFocus();
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+            }
+        }
+        return super.dispatchTouchEvent(event);
+    }
+    */
 }

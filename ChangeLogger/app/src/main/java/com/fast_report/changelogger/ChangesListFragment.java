@@ -18,7 +18,7 @@ public class ChangesListFragment extends Fragment {
 
     private RecyclerView mChangeRecyclerView;
     private ChangeAdapter mAdapter;
-    private List<Change> mChanges;
+    public List<Change> mChanges;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -156,7 +156,6 @@ public class ChangesListFragment extends Fragment {
                 }
             });
         }
-
     }
 
     private class ChangeAdapter extends RecyclerView.Adapter<ChangeHolder>{

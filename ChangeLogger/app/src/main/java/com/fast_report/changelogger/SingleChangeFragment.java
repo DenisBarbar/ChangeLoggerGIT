@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.UUID;
-import java.util.concurrent.Callable;
 
 public class SingleChangeFragment extends Fragment {
 
@@ -39,8 +38,8 @@ public class SingleChangeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        UUID crimeId = (UUID) getArguments().getSerializable(ARG_CHANGE_ID);
-        mChange = ChangeLab.get(getActivity()).getChange(crimeId);
+        UUID changeID = (UUID) getArguments().getSerializable(ARG_CHANGE_ID);
+        mChange = ChangeLab.get(getActivity()).getChange(changeID);
     }
     @Override
     public View onCreateView (LayoutInflater inflater, final ViewGroup container,
@@ -81,6 +80,7 @@ public class SingleChangeFragment extends Fragment {
                 mChange.setChangedText(mTextField.getText().toString());
                 mChange.setType(mTypeSpinner.getSelectedItem().toString());
                 mChange.setGroup(mGroupSpinner.getSelectedItem().toString());
+                getActivity().onBackPressed();
             }
         });
         mResetButton = (Button) v.findViewById(R.id.reset_button);

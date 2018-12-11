@@ -9,7 +9,7 @@ import java.util.UUID;
 public class ChangeLab {
     private static ChangeLab sChangeLab;
 
-    private List<Change> mChanges;
+     private List<Change> mChanges;
 
     public static ChangeLab get(Context context) {
         if (sChangeLab == null){
@@ -17,9 +17,10 @@ public class ChangeLab {
         }
         return sChangeLab;
     }
+
     private ChangeLab(Context context){
         mChanges = new ArrayList<>();
-        for (int i = 0; i < 100; i++){
+        for (int i = 0; i < 10; i++){
             Change change = new Change();
             change.setVersion("1.0" + i);
             change.setType("changed");
