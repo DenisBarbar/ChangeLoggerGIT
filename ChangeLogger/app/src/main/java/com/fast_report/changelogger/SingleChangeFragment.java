@@ -39,7 +39,7 @@ public class SingleChangeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         UUID changeID = (UUID) getArguments().getSerializable(ARG_CHANGE_ID);
-        mChange = ChangeLab.get(getActivity()).getChange(changeID);
+        mChange = ChangeLab.get(getActivity()).getChange(changeID); //Передача ссылки на синглет или копирование коллекции?
     }
     @Override
     public View onCreateView (LayoutInflater inflater, final ViewGroup container,

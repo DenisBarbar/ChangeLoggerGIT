@@ -103,7 +103,7 @@ public class ChangesListFragment extends Fragment {
 
     private void updateUI(){
         ChangeLab changeLab = ChangeLab.get(getActivity());
-        List<Change> changes = changeLab.getChanges();
+        List<Change> changes = changeLab.getChanges(); //Здесь происходит связывание с синглетом?
         if(mAdapter == null){
             mAdapter = new ChangeAdapter(changes);
         } else {
@@ -145,6 +145,8 @@ public class ChangesListFragment extends Fragment {
                 public void onClick(View v) {
                     mChanges.remove(mChange);
                     updateUI();
+                    Log.d("Items in collection", String.valueOf(mChanges.size()));
+                    Log.d("Items in singlet", String.valueOf(ChangeLab.get(getActivity()).getChanges().size()));
                 }
             });
             mEditButton = (Button) itemView.findViewById(R.id.edit_button);
@@ -161,7 +163,7 @@ public class ChangesListFragment extends Fragment {
     private class ChangeAdapter extends RecyclerView.Adapter<ChangeHolder>{
 
         public ChangeAdapter(List<Change> changes){
-            mChanges = changes;
+            mChanges = changes; //A здесь передача связи с синглетом на переменную коллекции фрагмента
         }
 
         @Override
