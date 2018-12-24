@@ -12,6 +12,8 @@ public class Change {
 
     public Change() {
         mId = UUID.randomUUID();
+        mType = "added";
+        mGroup = "public";
     }
 
     public UUID getId() {

@@ -2,6 +2,7 @@ package com.fast_report.changelogger;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.util.List;
 import java.util.UUID;
 
 public class SingleChangeFragment extends Fragment {
@@ -23,8 +25,10 @@ public class SingleChangeFragment extends Fragment {
     private Spinner mGroupSpinner;
     private Button mSaveButton;
     private Button mResetButton;
-    String[] typeArray;
-    String[] groupArray;
+    private String[] typeArray;
+    private String[] groupArray;
+    //Отладочный костыль
+    private boolean isNew = false;
 
     public static SingleChangeFragment newInstance(UUID changeId){
         Bundle args = new Bundle();
@@ -39,7 +43,12 @@ public class SingleChangeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         UUID changeID = (UUID) getArguments().getSerializable(ARG_CHANGE_ID);
-        mChange = ChangeLab.get(getActivity()).getChange(changeID); //Передача ссылки на синглет или копирование коллекции?
+        if (changeID != null) {
+            mChange = ChangeLab.get(getActivity()).getChange(changeID); //Передача ссылки на синглет или копирование коллекции?
+        } else {
+            mChange = new Change();
+            isNew = true;
+        }
     }
     @Override
     public View onCreateView (LayoutInflater inflater, final ViewGroup container,
@@ -47,13 +56,8 @@ public class SingleChangeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_single_change, container, false);
 
         mVersionField = (EditText) v.findViewById(R.id.version_field);
-        mVersionField.setText(mChange.getVersion());
-
         mAuthorField = (EditText) v.findViewById(R.id.author_field);
-        mAuthorField.setText(mChange.getAuthor());
-
         mTextField = (EditText) v.findViewById(R.id.text_field);
-        mTextField.setText(mChange.getChangedText());
 
         mTypeSpinner = (Spinner) v.findViewById(R.id.type_spinner);
         // получаем ресурсы
@@ -61,7 +65,7 @@ public class SingleChangeFragment extends Fragment {
         // создаем адаптер
         ArrayAdapter<String> typeAdapter = new ArrayAdapter(this.getContext(), android.R.layout.simple_spinner_item, typeArray);
         mTypeSpinner.setAdapter(typeAdapter);
-        updateTypeSpinner();
+
 
         mGroupSpinner = (Spinner) v.findViewById(R.id.group_spinner);
         // получаем ресурс
@@ -69,6 +73,11 @@ public class SingleChangeFragment extends Fragment {
         // создаем адаптер
         ArrayAdapter<String> groupAdapter = new ArrayAdapter(this.getContext(), android.R.layout.simple_spinner_item, groupArray);
         mGroupSpinner.setAdapter(groupAdapter);
+
+        mVersionField.setText(mChange.getVersion());
+        mAuthorField.setText(mChange.getAuthor());
+        mTextField.setText(mChange.getChangedText());
+        updateTypeSpinner();
         updateGroupSpinner();
 
         mSaveButton = (Button) v.findViewById(R.id.save_button);
@@ -80,6 +89,10 @@ public class SingleChangeFragment extends Fragment {
                 mChange.setChangedText(mTextField.getText().toString());
                 mChange.setType(mTypeSpinner.getSelectedItem().toString());
                 mChange.setGroup(mGroupSpinner.getSelectedItem().toString());
+                if (isNew){
+                    ChangeLab changeLab = ChangeLab.get(getActivity());
+                    changeLab.addChange(mChange);
+                }
                 getActivity().onBackPressed();
             }
         });
@@ -87,7 +100,6 @@ public class SingleChangeFragment extends Fragment {
         mResetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ;
                 mVersionField.setText(mChange.getVersion());
                 mAuthorField.setText(mChange.getAuthor());
                 mTextField.setText(mChange.getChangedText());

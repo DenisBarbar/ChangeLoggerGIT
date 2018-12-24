@@ -41,4 +41,14 @@ public class ChangeLab {
         }
         return null;
     }
+
+    public void deleteChange(int position){
+        mChanges.remove(position);
+    }
+    public void addChange(Change change){
+        mChanges.add(change);
+    }
+    public void updateChange(int position, Change change){
+        mChanges.set(position, change);
+    }
 }

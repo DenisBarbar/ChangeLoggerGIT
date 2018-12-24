@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity
         adminFragment = new AdminFragment();
 
         if (savedInstanceState == null){
+            Log.d("MainActivity", "SaveInstance is null");
             FragmentTransaction ftrans = getSupportFragmentManager().beginTransaction();
             ftrans.replace(R.id.head_fragment, mChangesHeaderFragment);
             ftrans.replace(R.id.main_fragment, mChangesListFragment);
@@ -119,9 +121,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        Log.d("MainActivity", "onSaveInstanceState");
     }
 
-    //Метод скрытия клавиатуры по любому действию
+    //Метод скрытия клавиатуры по любому нажатию
     /*
     @Override
     public boolean dispatchTouchEvent(@NonNull MotionEvent event) {
