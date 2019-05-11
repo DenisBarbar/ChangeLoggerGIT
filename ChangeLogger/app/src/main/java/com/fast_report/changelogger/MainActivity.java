@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity
     ChangesHeaderFragment mChangesHeaderFragment;
     ProductsFragment productsFragment;
     VersionsFragment versionsFragment;
-    CRUDFragment crudFragment;
     AdminFragment adminFragment;
 
     @Override
@@ -53,7 +52,6 @@ public class MainActivity extends AppCompatActivity
         mChangesHeaderFragment = new ChangesHeaderFragment();
         productsFragment = new ProductsFragment();
         versionsFragment = new VersionsFragment();
-        crudFragment = new CRUDFragment();
         adminFragment = new AdminFragment();
 
         if (savedInstanceState == null){
@@ -98,9 +96,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_versions) {
             ftrans.remove(mChangesHeaderFragment);
             ftrans.replace(R.id.main_fragment, versionsFragment);
-        } else if (id == R.id.nav_crud) {
-            ftrans.remove(mChangesHeaderFragment);
-            ftrans.replace(R.id.main_fragment, crudFragment);
         } else if (id == R.id.nav_admin) {
             ftrans.remove(mChangesHeaderFragment);
             ftrans.replace(R.id.main_fragment, adminFragment);

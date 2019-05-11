@@ -19,6 +19,7 @@ public class ChangesListFragment extends Fragment {
     private RecyclerView mChangeRecyclerView;
     private ChangeAdapter mAdapter;
     public List<Change> mChanges;
+    private ChangesRepository mRepository;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,8 @@ public class ChangesListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         Log.d("ChangesListFragment", "onCreateView");
+        mRepository = new ChangesRepository();
+        mRepository.Get();
         ((MainActivity)getActivity()).setActionBarTitle("Changes");
         View view = inflater.inflate(R.layout.fragment_changes_list, container, false);
         mChangeRecyclerView = (RecyclerView) view.findViewById(R.id.changes_recycler_view);
