@@ -31,21 +31,4 @@ public class SingleChangeActivity extends SingleFragmentActivity {
         UUID changeId = (UUID) getIntent().getSerializableExtra(EXTRA_CHANGE_ID);
         return SingleChangeFragment.newInstance(changeId);
     }
-
-    //Метод скрытия клавиатуры по любому нажатию
-    /*
-    @Override
-    public boolean dispatchTouchEvent(@NonNull MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            View v = getCurrentFocus();
-            if (v instanceof EditText) {
-                v.clearFocus();
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-
-            }
-        }
-        return super.dispatchTouchEvent(event);
-    }
-    */
 }

@@ -23,7 +23,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/changes_count"
+            android:id="@+id/versions_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center_vertical"
@@ -33,7 +33,7 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/button_new_change"
+            android:id="@+id/button_new_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -62,39 +62,6 @@
             android:layout_weight="3"
             android:text="@string/button_search" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textAll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/filter_all"
-            android:textAlignment="center"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/textPrivate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/filter_private"
-            android:textAlignment="center"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/textPublic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/filter_public"
-            android:textAlignment="center"
-            android:textSize="18sp" />
     </LinearLayout>
 
 </LinearLayout>

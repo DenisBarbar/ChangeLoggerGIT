@@ -28,7 +28,7 @@ public class ChangesHeaderFragment extends Fragment {
         Log.d("ChangesHeaderFragment", "onCreateHeaderView");
         ((MainActivity)getActivity()).setActionBarTitle("Changes");
         View view = inflater.inflate(R.layout.fragment_changes_header, container, false);
-        newButton = (Button) view.findViewById(R.id.button_new);
+        newButton = (Button) view.findViewById(R.id.button_new_change);
         newButton.setOnClickListener (new View.OnClickListener() {
             @Override
             public void onClick(View v) {

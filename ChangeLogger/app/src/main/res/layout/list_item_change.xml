@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/list_item_change_version"
@@ -58,31 +59,37 @@
         android:id="@+id/list_item_changed_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:padding="16dp"
-        android:text="ChangedText" />
+        android:padding="8dp"
+        android:text="Text" />
+    <TextView
+        android:id="@+id/list_item_changed_annotation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="Annotation" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="start"
+        android:padding="8dp"
+        >
+
+        <TextView
+            android:id="@+id/task_link_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_weight="3"
+            android:text="@string/task_link_text" />
 
         <TextView
             android:id="@+id/task_link"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/task_link_text"
-            android:textAlignment="center" />
-
-        <TextView
-            android:id="@+id/merge_request_link"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/merge_request_link_text"
-            android:textAlignment="center" />
+            android:layout_weight="2" />
 
     </LinearLayout>
 
@@ -90,25 +97,52 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="8dp">
 
-        <CheckBox
-            android:id="@+id/private_change"
+        <TextView
+            android:id="@+id/merge_link_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:enabled="false"
-            android:text="@string/private_change_text" />
+            android:layout_weight="3"
+            android:text="@string/merge_request_link_text"/>
+
+        <TextView
+            android:id="@+id/merge_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/documentation_link"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/documentation_link_text"
-            android:textAlignment="center" />
+            android:layout_weight="3"
+            android:text="@string/documentation_link_text"/>
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
 
     </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/private_change_checkbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:enabled="false"
+        android:text="@string/private_change_text" />
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/version_major_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/version_major_text" />
+
+    <EditText
+        android:id="@+id/version_major_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/version_minor_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/version_minor_text" />
+
+    <EditText
+        android:id="@+id/version_minor_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/version_build_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/version_build_text" />
+
+    <EditText
+        android:id="@+id/version_build_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/product_name_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/version_name_text" />
+
+    <EditText
+        android:id="@+id/version_name_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/version_type_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/version_type_text" />
+
+            <Spinner
+                android:id="@+id/version_type_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/version_state_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/version_state_text" />
+
+            <Spinner
+                android:id="@+id/version_state_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/reset_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/reset_button_text" />
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/save_button_text" />
+    </LinearLayout>
+
+</LinearLayout>

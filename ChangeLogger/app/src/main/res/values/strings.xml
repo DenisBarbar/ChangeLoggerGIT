@@ -38,6 +38,26 @@
     <string name="private_change_label">Разрешено изменение:</string>
     <string name="private_change">Private Change</string>
     <string name="text_label">Изменения в данной версии:</string>
+    <string name="annotation_label">Аннотация:</string>
+
+    <string name="product_name_text">Название продукта:</string>
+    <string name="product_desc_text">Описание продукта:</string>
+    <string name="product_url_text">URL продукта:</string>
+    <string name="product_rep_text">URL репозитория:</string>
+    <string name="product_tag_text">Тэг(.Net/VLC):</string>
+    <string name="product_avg_time_text">Среднее время сборки, секунд:</string>
+    <string name="product_parts_text">Какие части продукта были изменены:</string>
+
+    <string name="version_major_text">Major:</string>
+    <string name="version_minor_text">Minor:</string>
+    <string name="version_build_text">Билд:</string>
+    <string name="version_name_text">Название:</string>
+    <string name="version_type_text">Тип:</string>
+    <string name="version_state_text">Состояние:</string>
+
+    <string name="product_dok_rep_text">Документация:</string>
+    <string name="product_lang_text">Язык:</string>
+
     <string name="save_button_text">Сохранить</string>
     <string name="reset_button_text">Сбросить</string>
 

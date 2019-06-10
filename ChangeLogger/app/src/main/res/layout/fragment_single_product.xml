@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/product_name_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/product_name_text" />
+
+    <EditText
+        android:id="@+id/product_name_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/product_desc_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/product_desc_text" />
+
+    <EditText
+        android:id="@+id/product_desc_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/product_url_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/product_url_text" />
+
+    <EditText
+        android:id="@+id/product_url_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/product_rep_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/product_rep_text" />
+
+    <EditText
+        android:id="@+id/product_rep_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/product_tag_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/product_tag_text" />
+
+    <EditText
+        android:id="@+id/product_tag_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/product_avg_time_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/product_avg_time_text" />
+
+    <EditText
+        android:id="@+id/product_avg_time_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/product_parts_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/product_parts_text" />
+
+    <EditText
+        android:id="@+id/product_parts_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/reset_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/reset_button_text" />
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/save_button_text" />
+    </LinearLayout>
+
+</LinearLayout>

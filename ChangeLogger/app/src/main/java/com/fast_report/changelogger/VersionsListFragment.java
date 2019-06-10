@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class ChangesListFragment extends Fragment {
+public class VersionsListFragment extends Fragment {
 
     private RecyclerView mChangeRecyclerView;
     private ChangeAdapter mAdapter;
@@ -22,22 +22,17 @@ public class ChangesListFragment extends Fragment {
     private ChangesRepository mRepository;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        Log.d("ChangesListFragment", "onCreateView");
-        mRepository = new ChangesRepository();
-        mRepository.Get();
-        ((MainActivity)getActivity()).setActionBarTitle("Changes");
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        ((MainActivity)getActivity()).setActionBarTitle("Versions");
+        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         mChangeRecyclerView = (RecyclerView) view.findViewById(R.id.changes_recycler_view);
         mChangeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         updateUI();
         return view;
     }
+
 
     private void updateUI(){
         ChangeLab changeLab = ChangeLab.get(getActivity());

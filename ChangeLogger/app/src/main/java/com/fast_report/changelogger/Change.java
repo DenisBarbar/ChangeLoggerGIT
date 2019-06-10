@@ -8,6 +8,14 @@ public class Change {
     private String mType;
     private String mGroup;
     private String mAuthor;
+    private String mText;
+    private String mAnnotation;
+    private String mDocumentationLink;
+    private String mTaskLink;
+    private String mMergeLink;
+    private boolean mPrivateChange;
+
+
     private String mChangedText;
 
     public Change() {

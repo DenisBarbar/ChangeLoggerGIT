@@ -1,8 +1,6 @@
 package com.fast_report.changelogger;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,19 +10,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    ChangesListFragment mChangesListFragment;
     ChangesHeaderFragment mChangesHeaderFragment;
-    ProductsFragment productsFragment;
-    VersionsFragment versionsFragment;
+    ChangesListFragment mChangesListFragment;
+    ProductsHeaderFragment mProductsHeaderFragment;
+    ProductsListFragment mProductsListFragment;
+    VersionsHeaderFragment mVersionsHeaderFragment;
+    VersionsListFragment mVersionsListFragment;
     AdminFragment adminFragment;
 
     @Override
@@ -50,8 +46,10 @@ public class MainActivity extends AppCompatActivity
 
         mChangesListFragment = new ChangesListFragment();
         mChangesHeaderFragment = new ChangesHeaderFragment();
-        productsFragment = new ProductsFragment();
-        versionsFragment = new VersionsFragment();
+        mProductsListFragment = new ProductsListFragment();
+        mProductsHeaderFragment = new ProductsHeaderFragment();
+        mVersionsListFragment = new VersionsListFragment();
+        mVersionsHeaderFragment = new VersionsHeaderFragment();
         adminFragment = new AdminFragment();
 
         if (savedInstanceState == null){
@@ -91,13 +89,15 @@ public class MainActivity extends AppCompatActivity
             ftrans.replace(R.id.head_fragment, mChangesHeaderFragment);
             ftrans.replace(R.id.main_fragment, mChangesListFragment);
         } else if (id == R.id.nav_products) {
-            ftrans.remove(mChangesHeaderFragment);
-            ftrans.replace(R.id.main_fragment, productsFragment);
+            ftrans.replace(R.id.head_fragment, mProductsHeaderFragment);
+            ftrans.replace(R.id.main_fragment, mProductsListFragment);
         } else if (id == R.id.nav_versions) {
-            ftrans.remove(mChangesHeaderFragment);
-            ftrans.replace(R.id.main_fragment, versionsFragment);
+            ftrans.replace(R.id.head_fragment, mVersionsHeaderFragment);
+            ftrans.replace(R.id.main_fragment, mVersionsListFragment);
         } else if (id == R.id.nav_admin) {
             ftrans.remove(mChangesHeaderFragment);
+            ftrans.remove(mProductsHeaderFragment);
+            ftrans.remove(mVersionsHeaderFragment);
             ftrans.replace(R.id.main_fragment, adminFragment);
         } else if (id == R.id.nav_profile) {
 
