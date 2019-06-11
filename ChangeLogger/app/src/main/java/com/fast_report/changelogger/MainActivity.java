@@ -12,6 +12,14 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
+import java.util.List;
+
+import io.swagger.client.ApiClient;
+import io.swagger.client.ApiException;
+import io.swagger.client.api.ProductsApi;
+import io.swagger.client.model.ProductVM;
+import io.swagger.client.model.ProductsPageVM;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -23,9 +31,10 @@ public class MainActivity extends AppCompatActivity
     VersionsListFragment mVersionsListFragment;
     AdminFragment adminFragment;
 
+    ProductLab Lab = ProductLab.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         //Скрывать клавиатуру при создании активности
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN

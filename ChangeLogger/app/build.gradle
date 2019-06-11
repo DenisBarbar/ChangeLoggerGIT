@@ -29,7 +29,6 @@ dependencies {
     implementation 'org.threeten:threetenbp:1.4.0'
     implementation 'com.squareup.okhttp:okhttp:2.4.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
-    implementation name:'swagger-java-client-1.0.0', ext:'jar'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

@@ -19,7 +19,6 @@ public class VersionsListFragment extends Fragment {
     private RecyclerView mChangeRecyclerView;
     private ChangeAdapter mAdapter;
     public List<Change> mChanges;
-    private ChangesRepository mRepository;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

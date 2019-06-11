@@ -15,7 +15,7 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/last_comited_label"
+            android:id="@+id/product_comited_label"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"

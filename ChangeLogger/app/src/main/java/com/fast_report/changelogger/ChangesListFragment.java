@@ -19,7 +19,6 @@ public class ChangesListFragment extends Fragment {
     private RecyclerView mChangeRecyclerView;
     private ChangeAdapter mAdapter;
     public List<Change> mChanges;
-    private ChangesRepository mRepository;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,8 +28,6 @@ public class ChangesListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         Log.d("ChangesListFragment", "onCreateView");
-        mRepository = new ChangesRepository();
-        mRepository.Get();
         ((MainActivity)getActivity()).setActionBarTitle("Changes");
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         mChangeRecyclerView = (RecyclerView) view.findViewById(R.id.changes_recycler_view);
@@ -83,8 +80,6 @@ public class ChangesListFragment extends Fragment {
                 public void onClick(View v) {
                     mChanges.remove(mChange);
                     updateUI();
-                    Log.d("Items in collection", String.valueOf(mChanges.size()));
-                    Log.d("Items in singlet", String.valueOf(ChangeLab.get(getActivity()).getChanges().size()));
                 }
             });
             mEditButton = (Button) itemView.findViewById(R.id.edit_button);
