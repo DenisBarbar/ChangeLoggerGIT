@@ -83,7 +83,7 @@ public class SingleChangeFragment extends Fragment {
              //   mChange.setType(mTypeSpinner.getSelectedItem().toString());
               //  mChange.setGroup(mGroupSpinner.getSelectedItem().toString());
                 if (isNew){
-                    ChangeLab changeLab = ChangeLab.get(getActivity());
+                    //ChangeLab changeLab = ChangeLab.get(getActivity());
               //      changeLab.addChange(mChange);
                 }
                 getActivity().onBackPressed();

@@ -14,8 +14,6 @@ import java.util.List;
 public class ChangesHeaderFragment extends Fragment {
 
     Button newButton;
-    private ChangeLab changeLab = ChangeLab.get(getActivity());
-    private List<Change> mChanges = changeLab.getChanges();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

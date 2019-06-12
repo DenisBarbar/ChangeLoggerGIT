@@ -50,9 +50,6 @@ public class ProductsListFragment extends Fragment {
         }
 
         public class ProductViewHolder extends RecyclerView.ViewHolder {
-
-            private ProductVM mProduct;
-
             private TextView mProductOrderLabel;
             private TextView mProductNameLabel;
             private TextView mProductComitedLabel;
