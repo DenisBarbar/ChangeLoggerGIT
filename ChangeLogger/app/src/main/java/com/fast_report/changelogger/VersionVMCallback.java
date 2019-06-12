@@ -6,29 +6,29 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import io.swagger.client.model.ProductVM;
+import io.swagger.client.model.ProductVersionVM;
 
-public class ProductVMCallback implements ProductVMCallbackInterface {
+public class VersionVMCallback implements  VersionVMCallbackInterface {
     private final Lock lock;
     private final Condition condition;
-    private List<ProductVM> mProducts;
+    private List<ProductVersionVM> mVersions;
     private volatile boolean isReady;
 
-    ProductVMCallback() {
+    VersionVMCallback() {
         lock = new ReentrantLock();
         condition = lock.newCondition();
     }
 
 
     @Override
-    public void callback(List<ProductVM> products) {
+    public void callback(List<ProductVersionVM> versions) {
         lock.lock();
 
         try {
             if (isReady)
                 throw new IllegalStateException("This callback has already been performed");
 
-            mProducts = new ArrayList<>(products);
+            mVersions = new ArrayList<>(versions);
             isReady = true;
             condition.signalAll();
         }
@@ -53,8 +53,8 @@ public class ProductVMCallback implements ProductVMCallbackInterface {
     }
 
     @Override
-    public List<ProductVM> getProducts() {
-        return mProducts;
+    public List<ProductVersionVM> getVersions() {
+        return mVersions;
     }
 
     @Override

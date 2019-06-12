@@ -1,118 +1,116 @@
 package com.fast_report.changelogger;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.ArrayList;
+
+import io.swagger.client.model.ProductVersionVM;
+import io.swagger.client.model.UserVM;
 
 public class VersionsListFragment extends Fragment {
 
-    private RecyclerView mChangeRecyclerView;
-    private ChangeAdapter mAdapter;
-    public List<Change> mChanges;
+    VersionLab mVersionLab = VersionLab.getInstance();
+    RecyclerView mVersionsRecyclerView;
+
+    VersionVMCallbackInterface mVersionVMCallback = new VersionVMCallback();
+    ArrayList <ProductVersionVM> mVersions = new ArrayList<>(mVersionLab.getAllVersions(mVersionVMCallback));
+    VersionAdapter mVersionAdapter = new VersionAdapter(mVersions);
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ((MainActivity)getActivity()).setActionBarTitle("Versions");
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_list, container, false);
-        mChangeRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        mChangeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        updateUI();
+        mVersionsRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        mVersionsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mVersionsRecyclerView.setAdapter(mVersionAdapter);
         return view;
     }
 
+    private class VersionAdapter extends RecyclerView.Adapter <VersionAdapter.VersionViewHolder>{
 
-    private void updateUI(){
-        ChangeLab changeLab = ChangeLab.get(getActivity());
-        List<Change> changes = changeLab.getChanges(); //Здесь происходит связывание с синглетом?
-        if(mAdapter == null){
-            mAdapter = new ChangeAdapter(changes);
-        } else {
-            mAdapter.notifyDataSetChanged();
-        }
-        mChangeRecyclerView.setAdapter(mAdapter);
-    }
+        ArrayList<ProductVersionVM> mVersionList;
 
-    private class ChangeHolder extends RecyclerView.ViewHolder {
-
-        private Change mChange;
-        private TextView mVersionTextView;
-        private TextView mTypeTextView;
-        private TextView mGroupTextView;
-        private TextView mAuthorTextView;
-        private TextView mChangedTextView;
-        private Button mDeleteButton;
-        private Button mEditButton;
-
-        public void bindChange(Change change) {
-            mChange = change;
-            mVersionTextView.setText(mChange.getVersion());
-            mTypeTextView.setText(mChange.getType());
-            mGroupTextView.setText(mChange.getGroup());
-            mAuthorTextView.setText(mChange.getAuthor());
-            mChangedTextView.setText(mChange.getChangedText());
+        public VersionAdapter (ArrayList<ProductVersionVM> versionList){
+            this.mVersionList = versionList;
         }
 
-        public ChangeHolder (View itemView){
-            super(itemView);
-            mVersionTextView = (TextView) itemView.findViewById(R.id.list_item_change_version);
-            mTypeTextView = (TextView) itemView.findViewById(R.id.list_item_change_type);
-            mGroupTextView = (TextView) itemView.findViewById(R.id.list_item_change_group);
-            mAuthorTextView = (TextView) itemView.findViewById(R.id.list_item_change_author);
-            mChangedTextView = (TextView) itemView.findViewById(R.id.list_item_changed_text);
-            mDeleteButton = (Button) itemView.findViewById(R.id.delete_button);
-            mDeleteButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mChanges.remove(mChange);
-                    updateUI();
-                    Log.d("Items in collection", String.valueOf(mChanges.size()));
-                    Log.d("Items in singlet", String.valueOf(ChangeLab.get(getActivity()).getChanges().size()));
-                }
-            });
-            mEditButton = (Button) itemView.findViewById(R.id.edit_button);
-            mEditButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = SingleChangeActivity.newIntent(getActivity(), mChange.getId()); //Неявный вызов putExtra?
-                    startActivity(intent);
-                }
-            });
+        public class VersionViewHolder extends RecyclerView.ViewHolder {
+
+            private ProductVersionVM mVersion;
+
+            private TextView mProductOrderLabel;
+            private TextView mProductNameLabel;
+            private TextView mProductComitedLabel;
+            private TextView mProductDescriptionLabel;
+            private TextView mProductDocRepLabel;
+            private TextView mProductDocRepLink;
+            private TextView mProductAvgBuildLabel;
+            private TextView mProductLangLabel;
+
+            private Button mDeleteButton;
+            private Button mEditButton;
+
+            public VersionViewHolder (View itemView){
+                super(itemView);
+                /*
+                mProductOrderLabel = (TextView) itemView.findViewById(R.id.product_order_label);
+                mProductNameLabel = (TextView) itemView.findViewById(R.id.product_name_label);
+                mProductComitedLabel = (TextView) itemView.findViewById(R.id.product_comited_label);
+                mProductDescriptionLabel = (TextView) itemView.findViewById(R.id.product_description_label);
+                mProductDocRepLabel = (TextView) itemView.findViewById(R.id.product_doc_rep_label);
+                mProductDocRepLink = (TextView) itemView.findViewById(R.id.product_doc_rep_link);
+                mProductAvgBuildLabel = (TextView) itemView.findViewById(R.id.product_avg_time_label);
+                mProductLangLabel = (TextView) itemView.findViewById(R.id.product_lang_label);
+                */
+            }
+
+            public void bindVersion(ProductVersionVM version) {
+                /*
+                UserVM Author = product.getUser();
+                mProductOrderLabel.setText(product.getId().toString());
+                mProductNameLabel.setText(product.getName());
+                mProductComitedLabel.setText(Author.getName()+" "+Author.getFamilyName());
+                mProductDescriptionLabel.setText(product.getDescription());
+                //mProductDocRepLabel.setText(product.getId());
+                mProductDocRepLink.setText(product.getRepositoryUrl());
+                mProductAvgBuildLabel.setText((product.getAvgBuildTime()).toString());
+                mProductLangLabel.setText(product.getTag());
+                */
+            }
+
         }
-    }
 
-    private class ChangeAdapter extends RecyclerView.Adapter<ChangeHolder>{
-
-        public ChangeAdapter(List<Change> changes){
-            mChanges = changes; //A здесь передача связи с синглетом на переменную коллекции фрагмента
+        @NonNull
+        @Override
+        public VersionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_version, parent,false);
+            return new VersionViewHolder(view);
         }
 
         @Override
-        public ChangeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            View view = layoutInflater
-                    .inflate(R.layout.list_item_change, parent, false);
-            return new ChangeHolder(view);
+        public void onBindViewHolder(@NonNull VersionViewHolder holder, int position) {
+            ProductVersionVM version = mVersionList.get(position);
+            holder.bindVersion(version);
         }
+
         @Override
-        public void onBindViewHolder(ChangeHolder holder, int position){
-            Change change = mChanges.get(position);
-            holder.bindChange(change);
-        }
-        @Override
-        public int getItemCount(){
-            return mChanges.size();
+        public int getItemCount() {
+            return mVersionList.size();
         }
     }
 }
