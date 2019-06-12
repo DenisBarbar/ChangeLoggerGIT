@@ -22,7 +22,7 @@ public class ProductsListFragment extends Fragment {
     }
 
     ProductLab Lab = ProductLab.getInstance();
-    List<ProductVM> mProducts;
+    ArrayList <ProductVM> mProducts = new ArrayList<ProductVM>(Lab.getAllProducts());
     ProductAdapter mProductAdapter = new ProductAdapter(mProducts);
 
     @Override
@@ -31,10 +31,6 @@ public class ProductsListFragment extends Fragment {
         ((MainActivity)getActivity()).setActionBarTitle("Products");
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_list, container, false);
-
-        mProducts = Lab.getAllProducts();
-        ProductAdapter mProductAdapter = new ProductAdapter(mProducts);
-
     }
 
     private class ProductAdapter extends RecyclerView.Adapter <ProductAdapter.ProductViewHolder>{
