@@ -1,54 +1,32 @@
 package com.fast_report.changelogger;
 
-import android.content.Context;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+
+import io.swagger.client.model.ChangeVM;
 
 public class ChangeLab {
-    private static ChangeLab sChangeLab;
 
-     private List<Change> mChanges;
+    private List<ChangeVM> mChanges;
+    private static final String TAG = "API_APP";
 
-    public static ChangeLab get(Context context) {
-        if (sChangeLab == null){
-            sChangeLab = new ChangeLab(context);
-        }
+    public static final ChangeLab sChangeLab = new ChangeLab();
+
+    private ChangeLab(){
+    }
+
+    public static ChangeLab getInstance(){
         return sChangeLab;
     }
-
-    private ChangeLab(Context context){
-        mChanges = new ArrayList<>();
-        for (int i = 0; i < 10; i++){
-            Change change = new Change();
-            change.setVersion("1.0" + i);
-            change.setType("changed");
-            change.setGroup("public");
-            change.setAuthor("автор");
-            change.setChangedText("Изменения в данной версии");
-            mChanges.add(change);
+    public List<ChangeVM> getAllChanges(ChangeVMCallbackInterface callback){
+        new Thread(new ChangeVMGetter(callback)).start();
+        try {
+            callback.await();
+        } catch (InterruptedException iex) {
+            callback.error(iex);
         }
-    }
-    public List <Change> getChanges(){
+        finally {
+        }
+        mChanges = callback.getChanges();
         return mChanges;
-    }
-    public Change getChange(UUID id){
-        for (Change change: mChanges){
-            if (change.getId().equals(id)){
-                return change;
-            }
-        }
-        return null;
-    }
-
-    public void deleteChange(int position){
-        mChanges.remove(position);
-    }
-    public void addChange(Change change){
-        mChanges.add(change);
-    }
-    public void updateChange(int position, Change change){
-        mChanges.set(position, change);
     }
 }

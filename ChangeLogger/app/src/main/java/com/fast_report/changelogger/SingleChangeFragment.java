@@ -15,7 +15,6 @@ import java.util.UUID;
 public class SingleChangeFragment extends Fragment {
 
     private static final String ARG_CHANGE_ID = "change_id";
-    private Change mChange;
     private Spinner mVersionField;
     private EditText mTextField;
     private Spinner mTypeSpinner;
@@ -41,9 +40,9 @@ public class SingleChangeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         UUID changeID = (UUID) getArguments().getSerializable(ARG_CHANGE_ID);
         if (changeID != null) {
-            mChange = ChangeLab.get(getActivity()).getChange(changeID); //Передача ссылки на синглет или копирование коллекции?
+          //  mChange = ChangeLab.get(getActivity()).getChange(changeID); //Передача ссылки на синглет или копирование коллекции?
         } else {
-            mChange = new Change();
+          //  mChange = new Change();
             isNew = true;
         }
     }
@@ -80,12 +79,12 @@ public class SingleChangeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //mChange.setVersion(mVersionField.getText().toString());
-                mChange.setChangedText(mTextField.getText().toString());
-                mChange.setType(mTypeSpinner.getSelectedItem().toString());
-                mChange.setGroup(mGroupSpinner.getSelectedItem().toString());
+              //  mChange.setChangedText(mTextField.getText().toString());
+             //   mChange.setType(mTypeSpinner.getSelectedItem().toString());
+              //  mChange.setGroup(mGroupSpinner.getSelectedItem().toString());
                 if (isNew){
                     ChangeLab changeLab = ChangeLab.get(getActivity());
-                    changeLab.addChange(mChange);
+              //      changeLab.addChange(mChange);
                 }
                 getActivity().onBackPressed();
             }
@@ -95,7 +94,7 @@ public class SingleChangeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //mVersionField.setText(mChange.getVersion());
-                mTextField.setText(mChange.getChangedText());
+            //    mTextField.setText(mChange.getChangedText());
                 updateTypeSpinner();
                 updateGroupSpinner();
             }
@@ -106,16 +105,16 @@ public class SingleChangeFragment extends Fragment {
     }
     private void updateTypeSpinner(){
         for (int i=0; i<typeArray.length; i++){
-            if (mChange.getType().equals(typeArray[i])) {
+          //  if (mChange.getType().equals(typeArray[i])) {
                 mTypeSpinner.setSelection(i);
-            }
+           // }
         }
     }
     private void updateGroupSpinner(){
         for (int i=0; i<groupArray.length; i++){
-            if (mChange.getGroup().equals(groupArray[i])) {
+           // if (mChange.getGroup().equals(groupArray[i])) {
                 mGroupSpinner.setSelection(i);
-            }
+           // }
         }
     }
 }

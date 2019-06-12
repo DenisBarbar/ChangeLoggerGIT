@@ -26,7 +26,7 @@ public class VersionsListFragment extends Fragment {
         ((MainActivity)getActivity()).setActionBarTitle("Versions");
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_list, container, false);
-        mChangeRecyclerView = (RecyclerView) view.findViewById(R.id.changes_recycler_view);
+        mChangeRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mChangeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         updateUI();
         return view;
