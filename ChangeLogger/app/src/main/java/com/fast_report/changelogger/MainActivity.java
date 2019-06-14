@@ -12,14 +12,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
-import java.util.List;
-
-import io.swagger.client.ApiClient;
-import io.swagger.client.ApiException;
-import io.swagger.client.api.ProductsApi;
-import io.swagger.client.model.ProductVM;
-import io.swagger.client.model.ProductsPageVM;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -29,13 +21,9 @@ public class MainActivity extends AppCompatActivity
     ProductsListFragment mProductsListFragment;
     VersionsHeaderFragment mVersionsHeaderFragment;
     VersionsListFragment mVersionsListFragment;
-    AdminFragment adminFragment;
-
-    ProductLab Lab = ProductLab.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Скрывать клавиатуру при создании активности
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
@@ -59,7 +47,6 @@ public class MainActivity extends AppCompatActivity
         mProductsHeaderFragment = new ProductsHeaderFragment();
         mVersionsListFragment = new VersionsListFragment();
         mVersionsHeaderFragment = new VersionsHeaderFragment();
-        adminFragment = new AdminFragment();
 
         if (savedInstanceState == null){
             Log.d("MainActivity", "SaveInstance is null");
@@ -89,7 +76,6 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         FragmentTransaction ftrans = getSupportFragmentManager().beginTransaction();
@@ -103,17 +89,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_versions) {
             ftrans.replace(R.id.head_fragment, mVersionsHeaderFragment);
             ftrans.replace(R.id.main_fragment, mVersionsListFragment);
-        } else if (id == R.id.nav_admin) {
-            ftrans.remove(mChangesHeaderFragment);
-            ftrans.remove(mProductsHeaderFragment);
-            ftrans.remove(mVersionsHeaderFragment);
-            ftrans.replace(R.id.main_fragment, adminFragment);
-        } else if (id == R.id.nav_profile) {
-
-        } else if (id == R.id.nav_settings) {
-
-        } else if (id == R.id.nav_log_out) {
-
         }
         ftrans.commit();
 
@@ -127,21 +102,4 @@ public class MainActivity extends AppCompatActivity
         super.onSaveInstanceState(outState);
         Log.d("MainActivity", "onSaveInstanceState");
     }
-
-    //Метод скрытия клавиатуры по любому нажатию
-    /*
-    @Override
-    public boolean dispatchTouchEvent(@NonNull MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            View v = getCurrentFocus();
-            if (v instanceof EditText) {
-                v.clearFocus();
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-
-            }
-        }
-        return super.dispatchTouchEvent(event);
-    }
-    */
 }

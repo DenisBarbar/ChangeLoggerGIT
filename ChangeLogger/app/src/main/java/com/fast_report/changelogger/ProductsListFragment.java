@@ -80,7 +80,6 @@ public class ProductsListFragment extends Fragment {
                 mProductNameLabel.setText(product.getName());
                 mProductComitedLabel.setText(Author.getName()+" "+Author.getFamilyName());
                 mProductDescriptionLabel.setText(product.getDescription());
-                //mProductDocRepLabel.setText(product.getId());
                 mProductDocRepLink.setText(product.getRepositoryUrl());
                 mProductAvgBuildLabel.setText((product.getAvgBuildTime()).toString());
                 mProductLangLabel.setText(product.getTag());
