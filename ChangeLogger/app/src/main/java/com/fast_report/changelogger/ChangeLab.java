@@ -2,12 +2,12 @@ package com.fast_report.changelogger;
 
 import java.util.List;
 
+import io.swagger.client.model.Change;
 import io.swagger.client.model.ChangeVM;
 
 public class ChangeLab {
 
     private List<ChangeVM> mChanges;
-    private static final String TAG = "API_APP";
 
     public static final ChangeLab sChangeLab = new ChangeLab();
 
@@ -17,8 +17,8 @@ public class ChangeLab {
     public static ChangeLab getInstance(){
         return sChangeLab;
     }
-    public List<ChangeVM> getAllChanges(ChangeVMCallbackInterface callback){
-        new Thread(new ChangeVMGetter(callback)).start();
+    public List<ChangeVM> getAllChanges(Integer projectId, ChangeVMCallbackInterface callback){
+        new Thread(new ChangeVMGetter(projectId, callback)).start();
         try {
             callback.await();
         } catch (InterruptedException iex) {
@@ -28,5 +28,11 @@ public class ChangeLab {
         }
         mChanges = callback.getChanges();
         return mChanges;
+    }
+    public void updateChange(Integer changeId, Change change){
+        new Thread(new ChangeVMUpdater(changeId, change)).start();
+    }
+    public ChangeVM getChange(Integer changeId){
+        return mChanges.get(changeId);
     }
 }

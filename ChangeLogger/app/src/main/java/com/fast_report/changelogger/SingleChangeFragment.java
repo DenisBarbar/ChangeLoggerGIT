@@ -10,8 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import java.util.UUID;
-
 public class SingleChangeFragment extends Fragment {
 
     private static final String ARG_CHANGE_ID = "change_id";
@@ -26,7 +24,7 @@ public class SingleChangeFragment extends Fragment {
     //Отладочный костыль
     private boolean isNew = false;
 
-    public static SingleChangeFragment newInstance(UUID changeId){
+    public static SingleChangeFragment newInstance(int changeId){
         Bundle args = new Bundle();
         args.putSerializable(ARG_CHANGE_ID, changeId);
 
@@ -38,13 +36,13 @@ public class SingleChangeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        UUID changeID = (UUID) getArguments().getSerializable(ARG_CHANGE_ID);
-        if (changeID != null) {
+        int changeID = (Integer) getArguments().getSerializable(ARG_CHANGE_ID);
+        //if (changeID != null) {
           //  mChange = ChangeLab.get(getActivity()).getChange(changeID); //Передача ссылки на синглет или копирование коллекции?
-        } else {
-          //  mChange = new Change();
+        //} else {
+        //mChange = new Change();
             isNew = true;
-        }
+        //}
     }
     @Override
     public View onCreateView (LayoutInflater inflater, final ViewGroup container,

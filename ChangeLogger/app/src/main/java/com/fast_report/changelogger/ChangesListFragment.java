@@ -1,5 +1,6 @@
 package com.fast_report.changelogger;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.swagger.client.model.ChangeVM;
+import io.swagger.client.model.ProductVersionVM;
 import io.swagger.client.model.TranslationVM;
 import io.swagger.client.model.UserVM;
 
@@ -24,8 +26,9 @@ public class ChangesListFragment extends Fragment {
     ChangeLab mChangeLab = ChangeLab.getInstance();
     RecyclerView mChangesRecyclerView;
 
+    private Integer mProjectId = 1;
     ChangeVMCallbackInterface mChangeVMCallback = new ChangeVMCallback();
-    ArrayList <ChangeVM> mChanges = new ArrayList<>(mChangeLab.getAllChanges(mChangeVMCallback));
+    ArrayList <ChangeVM> mChanges = new ArrayList<>(mChangeLab.getAllChanges(mProjectId, mChangeVMCallback));
     ChangeAdapter mChangeAdapter = new ChangeAdapter(mChanges);
 
     @Override
@@ -53,6 +56,7 @@ public class ChangesListFragment extends Fragment {
         }
 
         public class ChangeViewHolder extends RecyclerView.ViewHolder {
+            private ChangeVM mChange;
             private TextView mListItemChangeVersion;
             private TextView mListItemChangeType;
             private TextView mListItemChangeGroup;
@@ -79,14 +83,29 @@ public class ChangesListFragment extends Fragment {
                 mListItemMergeLink = (TextView) itemView.findViewById(R.id.merge_link);
                 mListItemDocumentationLink = (TextView) itemView.findViewById(R.id.documentation_link);
                 mPrivateChangeCheckbox = (CheckBox) itemView.findViewById(R.id.private_change_checkbox);
+
+                mEditButton = (Button) itemView.findViewById(R.id.edit_button);
+                mEditButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = SingleChangeActivity.newIntent(getActivity(), mChange.getId()); //Неявный вызов putExtra?
+                        startActivity(intent);
+                    }
+                });
             }
 
             public void bindChange(ChangeVM change) {
+                mChange = change;
                 UserVM mAuthor = change.getUser();
+                ProductVersionVM mVersion = change.getVersion();
+                String versionName = mVersion.getMajor() + "." + mVersion.getMinor() + "." + mVersion.getBuild();
+                if (mVersion.getMajor() == Integer.MAX_VALUE){
+                    versionName = "Current version";
+                }
                 List <TranslationVM> mTranslations = change.getTranslations();
-                mListItemChangeVersion.setText(change.getVersion().getName());
-                mListItemChangeType.setText(change.getType().toString());
-                mListItemChangeGroup.setText(change.getGroup().getName());
+                mListItemChangeVersion.setText(versionName);
+                mListItemChangeType.setText("Type: " + change.getType().toString());
+                mListItemChangeGroup.setText("Group: "+ change.getGroup().getName());
                 mListItemChangeAuthor.setText(mAuthor.getName()+" "+mAuthor.getFamilyName());
                 mListItemChangeText.setText(mTranslations.get(1).getText());
                 mListItemChangeAnnotation.setText(mTranslations.get(1).getAnnotation());

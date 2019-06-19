@@ -10,7 +10,6 @@ import io.swagger.client.ApiException;
 import io.swagger.client.api.ChangesApi;
 import io.swagger.client.model.ChangeVM;
 import io.swagger.client.model.ChangesPageVM;
-import io.swagger.client.model.Page;
 
 public class ChangeVMGetter implements Runnable {
     private static final String TAG = "ProductVMGetter";

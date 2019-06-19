@@ -53,44 +53,35 @@ public class VersionsListFragment extends Fragment {
 
             private ProductVersionVM mVersion;
 
-            private TextView mProductOrderLabel;
-            private TextView mProductNameLabel;
-            private TextView mProductComitedLabel;
-            private TextView mProductDescriptionLabel;
-            private TextView mProductDocRepLabel;
-            private TextView mProductDocRepLink;
-            private TextView mProductAvgBuildLabel;
-            private TextView mProductLangLabel;
+            private TextView mVersionOrderLabel;
+            private TextView mVersionNameLabel;
+            private TextView mVersionStateLabel;
+            private TextView mVersionTypeLabel;
+            private TextView mVersionChangesCountLabel;
 
             private Button mDeleteButton;
             private Button mEditButton;
 
             public VersionViewHolder (View itemView){
                 super(itemView);
-                /*
-                mProductOrderLabel = (TextView) itemView.findViewById(R.id.product_order_label);
-                mProductNameLabel = (TextView) itemView.findViewById(R.id.product_name_label);
-                mProductComitedLabel = (TextView) itemView.findViewById(R.id.product_comited_label);
-                mProductDescriptionLabel = (TextView) itemView.findViewById(R.id.product_description_label);
-                mProductDocRepLabel = (TextView) itemView.findViewById(R.id.product_doc_rep_label);
-                mProductDocRepLink = (TextView) itemView.findViewById(R.id.product_doc_rep_link);
-                mProductAvgBuildLabel = (TextView) itemView.findViewById(R.id.product_avg_time_label);
-                mProductLangLabel = (TextView) itemView.findViewById(R.id.product_lang_label);
-                */
+                mVersionOrderLabel = (TextView) itemView.findViewById(R.id.version_order_label);
+                mVersionNameLabel = (TextView) itemView.findViewById(R.id.version_name_label);
+                mVersionStateLabel = (TextView) itemView.findViewById(R.id.version_state_label);
+                mVersionTypeLabel = (TextView) itemView.findViewById(R.id.version_type_label);
+                mVersionChangesCountLabel = (TextView) itemView.findViewById(R.id.version_changes_count_label);
             }
 
             public void bindVersion(ProductVersionVM version) {
-                /*
-                UserVM Author = product.getUser();
-                mProductOrderLabel.setText(product.getId().toString());
-                mProductNameLabel.setText(product.getName());
-                mProductComitedLabel.setText(Author.getName()+" "+Author.getFamilyName());
-                mProductDescriptionLabel.setText(product.getDescription());
-                //mProductDocRepLabel.setText(product.getId());
-                mProductDocRepLink.setText(product.getRepositoryUrl());
-                mProductAvgBuildLabel.setText((product.getAvgBuildTime()).toString());
-                mProductLangLabel.setText(product.getTag());
-                */
+                mVersion = version;
+                String versionName = mVersion.getMajor() + "." + mVersion.getMinor() + "." + mVersion.getBuild();
+                if (version.getMajor() == Integer.MAX_VALUE){
+                    versionName = "Current version";
+                }
+                mVersionOrderLabel.setText("#" + mVersion.getId().toString());
+                mVersionNameLabel.setText("Version: " + versionName);
+                mVersionStateLabel.setText(mVersion.getState().toString());
+                mVersionTypeLabel.setText(mVersion.getType().toString());
+                mVersionChangesCountLabel.setText("Changes count: " + Integer.toString(mVersion.getChangesCount(), 10));
             }
 
         }
