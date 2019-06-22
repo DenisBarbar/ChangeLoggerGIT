@@ -1,5 +1,6 @@
 package com.fast_report.changelogger;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -50,12 +51,14 @@ public class ProductsListFragment extends Fragment {
         }
 
         public class ProductViewHolder extends RecyclerView.ViewHolder {
+
+            private ProductVM mProduct;
+
             private TextView mProductOrderLabel;
             private TextView mProductNameLabel;
             private TextView mProductComitedLabel;
             private TextView mProductDescriptionLabel;
             private TextView mProductDocRepLabel;
-            private TextView mProductDocRepLink;
             private TextView mProductAvgBuildLabel;
             private TextView mProductLangLabel;
 
@@ -69,20 +72,31 @@ public class ProductsListFragment extends Fragment {
                 mProductComitedLabel = (TextView) itemView.findViewById(R.id.product_comited_label);
                 mProductDescriptionLabel = (TextView) itemView.findViewById(R.id.product_description_label);
                 mProductDocRepLabel = (TextView) itemView.findViewById(R.id.product_doc_rep_label);
-                mProductDocRepLink = (TextView) itemView.findViewById(R.id.product_doc_rep_link);
                 mProductAvgBuildLabel = (TextView) itemView.findViewById(R.id.product_avg_time_label);
                 mProductLangLabel = (TextView) itemView.findViewById(R.id.product_lang_label);
+                mEditButton = (Button) itemView.findViewById(R.id.edit_button);
+                mEditButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = SingleProductActivity.newIntent(getActivity(), mProduct.getId()); //Неявный вызов putExtra?
+                        startActivity(intent);
+                    }
+                });
             }
 
             public void bindProduct(ProductVM product) {
+                mProduct = product;
+                String docLabel = getResources().getString(R.string.product_dok_rep_text);
+                String avgTimeLabel = getResources().getString(R.string.product_avg_time_text);
+                String langLabel = getResources().getString(R.string.product_lang_text);
                 UserVM Author = product.getUser();
-                mProductOrderLabel.setText(product.getId().toString());
+                mProductOrderLabel.setText("#" + product.getId().toString());
                 mProductNameLabel.setText(product.getName());
                 mProductComitedLabel.setText(Author.getName()+" "+Author.getFamilyName());
                 mProductDescriptionLabel.setText(product.getDescription());
-                mProductDocRepLink.setText(product.getRepositoryUrl());
-                mProductAvgBuildLabel.setText((product.getAvgBuildTime()).toString());
-                mProductLangLabel.setText(product.getTag());
+                mProductDocRepLabel.setText(docLabel+"   "+product.getRepositoryUrl());
+                mProductAvgBuildLabel.setText(avgTimeLabel+"   "+(product.getAvgBuildTime()).toString());
+                mProductLangLabel.setText(langLabel+"   "+product.getTag());
             }
 
         }

@@ -6,37 +6,16 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_changes"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_settings_black"
             android:title="Changes" />
         <item
             android:id="@+id/nav_products"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_menu_send"
             android:title="Products" />
         <item
             android:id="@+id/nav_versions"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_menu_gallery"
             android:title="Versions" />
-        <item
-            android:id="@+id/nav_admin"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Admin Panel" />
     </group>
-
-    <item android:title="User">
-        <menu>
-            <item
-                android:id="@+id/nav_profile"
-                android:icon="@drawable/ic_person_black"
-                android:title="Profile" />
-            <item
-                android:id="@+id/nav_settings"
-                android:icon="@drawable/ic_settings_black"
-                android:title="Settings" />
-            <item
-                android:id="@+id/nav_log_out"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Logout" />
-        </menu>
-    </item>
 
 </menu>

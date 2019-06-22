@@ -26,21 +26,10 @@ public class VersionVMGetter implements Runnable {
         Integer produtId = 1;
         Integer page = 1;
         String filterType = "";
-        Integer versionId = 1;
         Integer take = 100;
         try {
             VersionsPageVM result = api.apiProductVersionsProductByProductIdByPageByTakeBySearchingTextGet(produtId, filterType, page, take);
             List<ProductVersionVM> versions = result.getEntities();
-            for (ProductVersionVM entry : versions) {
-                Log.i(TAG, "-------------------Versions information ---------------------");
-                Log.i(TAG, "ID: #" + entry.getId());
-                Log.i(TAG, "Type: " + entry.getType());
-                Log.i(TAG, "CreateDate: " + entry.getCreateDate());
-                Log.i(TAG, "Author: " + entry.getUser().getName() + " " + entry.getUser().getFamilyName() + " (" + entry.getUser().getRole() + ")");
-            }
-            Log.w(TAG, "------------------------------------------");
-            Log.w(TAG, result.toString());
-
             mCallback.callback(versions);
         } catch (ApiException e) {
             mCallback.error(e);

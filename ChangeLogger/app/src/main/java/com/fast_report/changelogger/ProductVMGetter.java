@@ -28,18 +28,6 @@ public class ProductVMGetter   implements Runnable {
         try {
             ProductsPageVM result = apiInstance.apiProductsSearchByPageByTakeBySearchingTextGet("", page, take);
             List<ProductVM> products = result.getEntities();
-            for (ProductVM entry : products) {
-                Log.i(TAG, "-------------------Project information ---------------------");
-                Log.i(TAG, "ID: #" + entry.getId());
-                Log.i(TAG, "Name: " + entry.getName());
-                Log.i(TAG, "AvgBuildTime: " + entry.getAvgBuildTime());
-                Log.i(TAG, "Author: " + entry.getUser().getName() + " " + entry.getUser().getFamilyName() + " (" + entry.getUser().getRole() + ")");
-                Log.i(TAG, "productUrl: " + entry.getProductUrl());
-                Log.i(TAG, "repositoryUrl: " + entry.getRepositoryUrl());
-            }
-            Log.w(TAG, "------------------------------------------");
-            Log.w(TAG, result.toString());
-
             mCallback.callback(products);
         } catch (ApiException e) {
             mCallback.error(e);

@@ -1,5 +1,6 @@
 package com.fast_report.changelogger;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -69,6 +70,14 @@ public class VersionsListFragment extends Fragment {
                 mVersionStateLabel = (TextView) itemView.findViewById(R.id.version_state_label);
                 mVersionTypeLabel = (TextView) itemView.findViewById(R.id.version_type_label);
                 mVersionChangesCountLabel = (TextView) itemView.findViewById(R.id.version_changes_count_label);
+                mEditButton = (Button) itemView.findViewById(R.id.edit_button);
+                mEditButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = SingleVersionActivity.newIntent(getActivity(), mVersion.getId());
+                        startActivity(intent);
+                    }
+                });
             }
 
             public void bindVersion(ProductVersionVM version) {

@@ -8,81 +8,96 @@
     <string name="action_settings">Settings</string>
 
     <!-- Headers -->
-    <string name="changes_text">Изменения</string>
-    <string name="products_text">Продукты</string>
-    <string name="versions_text">Версии</string>
-    <string name="CRUD_text">CRUD</string>
-    <string name="admin_text">Админская панель</string>
+    <string name="changes_text">Changes</string>
+    <string name="products_text">Products</string>
+    <string name="versions_text">Versions</string>
 
-    <!-- fragment_changes_header -->
     <string name="changes_count">11 changes</string>
     <string name="hint">Find a post</string>
     <string name="button_search">Search</string>
-    <string name="button_save">Save</string>
     <string name="filter_all">All</string>
     <string name="filter_public">Public</string>
     <string name="filter_private">Private</string>
-    <string name="button_new">New</string>
-    <string name="button_prev">Prew</string>
-    <string name="button_next">Next</string>
     <string name="edit_button_text">Edit</string>
     <string name="delete_button_text">Delete</string>
     <string name="task_link_text">Task Link</string>
     <string name="merge_request_link_text">Merge Request Link</string>
     <string name="documentation_link_text">Documentation Link</string>
     <string name="private_change_text">Private Change</string>
-    <string name="version_label">Версия продукта:</string>
-    <string name="type_label">Тип обновления:</string>
-    <string name="group_label">Группа обновления:</string>
-    <string name="author_label">Автор обновления:</string>
-    <string name="private_change_label">Разрешено изменение:</string>
+    <string name="version_label">Product version:</string>
+    <string name="type_label">Type:</string>
+    <string name="group_label">Group:</string>
     <string name="private_change">Private Change</string>
-    <string name="text_label">Изменения в данной версии:</string>
-    <string name="annotation_label">Аннотация:</string>
+    <string name="text_label">Text:</string>
+    <string name="annotation_label">Annotation:</string>
 
-    <string name="product_name_text">Название продукта:</string>
-    <string name="product_desc_text">Описание продукта:</string>
-    <string name="product_url_text">URL продукта:</string>
-    <string name="product_rep_text">URL репозитория:</string>
-    <string name="product_tag_text">Тэг(.Net/VLC):</string>
-    <string name="product_avg_time_text">Среднее время сборки, секунд:</string>
-    <string name="product_parts_text">Какие части продукта были изменены:</string>
+    <string name="product_name_text">Name:</string>
+    <string name="product_desc_text">Description:</string>
+    <string name="product_url_text">Product URL:</string>
+    <string name="product_rep_text">Repository URL:</string>
+    <string name="product_tag_text">Tag(.Net/VLC):</string>
+    <string name="product_avg_time_text">Average build time, sec:</string>
 
     <string name="version_major_text">Major:</string>
     <string name="version_minor_text">Minor:</string>
-    <string name="version_build_text">Билд:</string>
-    <string name="version_name_text">Название:</string>
-    <string name="version_type_text">Тип:</string>
-    <string name="version_state_text">Состояние:</string>
+    <string name="version_build_text">Build:</string>
+    <string name="version_name_text">Name:</string>
+    <string name="version_type_text">Type:</string>
+    <string name="version_state_text">State:</string>
 
-    <string name="product_dok_rep_text">Документация:</string>
-    <string name="product_lang_text">Язык:</string>
+    <string name="product_dok_rep_text">Documentation link:</string>
+    <string name="product_lang_text">Lang:</string>
 
-    <string name="save_button_text">Сохранить</string>
-    <string name="reset_button_text">Сбросить</string>
+    <string name="save_button_text">Save</string>
+    <string name="reset_button_text">Reset</string>
+
+    <string name="new_change_label">Add new change</string>
+    <string name="new_product_label">Add new product</string>
+    <string name="new_version_label">Add new version</string>
+    <string name="create_button">Create</string>
+
 
     <string-array name="products">
-        <item>Product 1</item>
-        <item>Product 2</item>
-        <item>Product 3</item>
-        <item>Product 4</item>
-        <item>Product 5</item>
+        <item>TestProduct</item>
+        <item>Product2</item>
+        <item>DocumentSprint</item>
     </string-array>
 
     <string-array name="types_array">
-        <item>added</item>
-        <item>changed</item>
-        <item>fixed</item>
-        <item>deleted</item>
+        <item>Added</item>
+        <item>Changed</item>
+        <item>Fixed</item>
+        <item>Removed</item>
+        <item>Deprecated</item>
+        <item>Security</item>
     </string-array>
 
     <string-array name="groups_array">
-        <item>public</item>
-        <item>private</item>
+        <item>Common</item>
+        <item>Part1</item>
+        <item>Part2</item>
+    </string-array>
+
+    <string-array name="versions_array">
+        <item>2018.1.0</item>
+        <item>2018.1.1</item>
+        <item>Current version</item>
+    </string-array>
+
+    <string-array name="version_types">
+        <item>Stable</item>
+        <item>Night</item>
+        <item>None</item>
+    </string-array>
+
+    <string-array name="versions_states">
+        <item>Initiated</item>
+        <item>Building</item>
+        <item>Failed</item>
+        <item>Success</item>
     </string-array>
 
     <string name="title_activity_login">ChangeLogger</string>
-    <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -94,10 +109,10 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="username_label_text">Имя пользователя:</string>
-    <string name="password_label_text">Пароль:</string>
-    <string name="username_field_hint">Введите имя пользоваля</string>
-    <string name="password_field_hint">Введите пароль</string>
-    <string name="login_button_text">Войти в приложение</string>
+    <string name="username_label_text">Username:</string>
+    <string name="password_label_text">Password:</string>
+    <string name="username_field_hint">Enter username</string>
+    <string name="password_field_hint">Enter password</string>
+    <string name="login_button_text">Login</string>
 
 </resources>

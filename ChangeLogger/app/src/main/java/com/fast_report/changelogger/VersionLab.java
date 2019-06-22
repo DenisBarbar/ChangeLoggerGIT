@@ -2,6 +2,7 @@ package com.fast_report.changelogger;
 
 import java.util.List;
 
+import io.swagger.client.model.ProductVM;
 import io.swagger.client.model.ProductVersionVM;
 
 public class VersionLab {
@@ -28,5 +29,12 @@ public class VersionLab {
         }
         mVersions = callback.getVersions();
         return mVersions;
+    }
+
+    public ProductVersionVM getVersion(Integer versionId){
+        for (ProductVersionVM entry : mVersions) {
+            if (entry.getId() == versionId) return entry;
+        }
+        return null;
     }
 }

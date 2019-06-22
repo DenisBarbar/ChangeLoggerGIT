@@ -2,7 +2,6 @@ package com.fast_report.changelogger;
 
 import java.util.List;
 
-import io.swagger.client.model.Change;
 import io.swagger.client.model.ChangeVM;
 
 public class ChangeLab {
@@ -29,10 +28,11 @@ public class ChangeLab {
         mChanges = callback.getChanges();
         return mChanges;
     }
-    public void updateChange(Integer changeId, Change change){
-        new Thread(new ChangeVMUpdater(changeId, change)).start();
-    }
+
     public ChangeVM getChange(Integer changeId){
-        return mChanges.get(changeId);
+        for (ChangeVM entry : mChanges) {
+            if (entry.getId() == changeId) return entry;
+        }
+        return null;
     }
 }

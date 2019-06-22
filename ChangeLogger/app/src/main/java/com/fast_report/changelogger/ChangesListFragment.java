@@ -96,22 +96,29 @@ public class ChangesListFragment extends Fragment {
 
             public void bindChange(ChangeVM change) {
                 mChange = change;
-                UserVM mAuthor = change.getUser();
-                ProductVersionVM mVersion = change.getVersion();
+                String mAuthor;
+                if (mChange.getUser()!=null){
+                    UserVM mUser = mChange.getUser();
+                    mAuthor = mUser.getName()+" "+mUser.getFamilyName();
+                } else {
+                    mAuthor = "John Doe";
+                }
+                ProductVersionVM mVersion = mChange.getVersion();
                 String versionName = mVersion.getMajor() + "." + mVersion.getMinor() + "." + mVersion.getBuild();
                 if (mVersion.getMajor() == Integer.MAX_VALUE){
                     versionName = "Current version";
                 }
-                List <TranslationVM> mTranslations = change.getTranslations();
+                List <TranslationVM> mTranslations = mChange.getTranslations();
                 mListItemChangeVersion.setText(versionName);
-                mListItemChangeType.setText("Type: " + change.getType().toString());
-                mListItemChangeGroup.setText("Group: "+ change.getGroup().getName());
-                mListItemChangeAuthor.setText(mAuthor.getName()+" "+mAuthor.getFamilyName());
+                mListItemChangeType.setText("Type: " + mChange.getType().toString());
+                mListItemChangeGroup.setText("Group: "+ mChange.getGroup().getName());
+                mListItemChangeAuthor.setText(mAuthor);
                 mListItemChangeText.setText(mTranslations.get(1).getText());
                 mListItemChangeAnnotation.setText(mTranslations.get(1).getAnnotation());
-                mListItemTaskLink.setText(change.getTaskLink());
-                mListItemMergeLink.setText((change.getMergeRequestLink()));
+                mListItemTaskLink.setText(mChange.getTaskLink());
+                mListItemMergeLink.setText((mChange.getMergeRequestLink()));
                 mListItemDocumentationLink.setText(mTranslations.get(1).getDocumentationLink());
+                if (mChange.isIsPrivate()) mPrivateChangeCheckbox.setChecked(true);
             }
 
         }

@@ -29,4 +29,10 @@ public class ProductLab {
         mProducts = callback.getProducts();
         return mProducts;
     }
+    public ProductVM getProduct(Integer productId){
+        for (ProductVM entry : mProducts) {
+            if (entry.getId() == productId) return entry;
+        }
+        return null;
+    }
 }

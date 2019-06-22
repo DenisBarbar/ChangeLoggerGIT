@@ -37,16 +37,6 @@ public class ChangeVMGetter implements Runnable {
                 ChangesPageVM result = api.apiChangesProductByProductIdByPageByTakeByFilterTypeByVersionIdGet(mProjectId, page, filterType, versionId, take);
                 totalPages = result.getPage().getTotalPages();
                 List<ChangeVM> changes = result.getEntities();
-                for (ChangeVM entry : changes) {
-                    Log.i(TAG, "-------------------Change information ---------------------");
-                    Log.i(TAG, "ID: #" + entry.getId());
-                    Log.i(TAG, "Type: " + entry.getType());
-                    Log.i(TAG, "Text: " + entry.getTranslations().get(0).getText());
-                    Log.i(TAG, "CreateDate: " + entry.getCreateDate());
-                    Log.i(TAG, "Author: " + entry.getUser().getName() + " " + entry.getUser().getFamilyName() + " (" + entry.getUser().getRole() + ")");
-                }
-                Log.w(TAG, "------------------------------------------");
-                Log.w(TAG, result.toString());
                 page++;
                 allChanges.addAll(changes);
             } while (page <= totalPages);
